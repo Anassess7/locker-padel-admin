@@ -1,14 +1,15 @@
 services:
   - type: web
     name: locker-padel-admin
-    env: php
-    buildCommand: composer install && php artisan key:generate && php artisan migrate && npm install && npm run build
-    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    runtime: docker
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
+      - key: APP_KEY
+        sync: false
       - key: APP_URL
         sync: false
       - key: DB_CONNECTION
@@ -40,3 +41,7 @@ services:
       - key: MAIL_FROM_NAME
         value: "Locker Padel Admin"
 
+  - type: mysql
+    name: locker-padel-db
+    plan: free
+    ipAllowList: [] 
