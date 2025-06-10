@@ -16,6 +16,8 @@ WORKDIR /var/www
 # Copy package files first
 COPY package*.json ./
 COPY vite.config.js ./
+COPY postcss.config.js ./
+COPY tailwind.config.js ./
 
 # Install Node.js dependencies
 RUN npm install
@@ -27,9 +29,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Build assets
-RUN npm run build && \
-    ls -la public/build/ && \
-    cat public/build/manifest.json
+RUN npm run build
 
 # Laravel permissions
 RUN chown -R www-data:www-data /var/www \
