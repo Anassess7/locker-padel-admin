@@ -13,23 +13,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy package files first
-COPY package*.json ./
-COPY vite.config.js ./
-COPY postcss.config.js ./
-COPY tailwind.config.js ./
-
-# Install Node.js dependencies
-RUN npm install
-
-# Copy the rest of the application
+# Copy the entire application
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
-
-# Build assets
-RUN npm run build
 
 # Laravel permissions
 RUN chown -R www-data:www-data /var/www \
