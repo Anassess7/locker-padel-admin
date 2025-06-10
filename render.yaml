@@ -15,15 +15,19 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        value: locker-padel-db.internal
+        value: dpg-d143u4mmcj7s738l1iug-a.oregon-postgres.render.com
       - key: DB_PORT
         value: 5432
       - key: DB_DATABASE
-        value: locker_padel
+        value: lockerpadel
       - key: DB_USERNAME
-        value: render_user
+        value: lockerpadel_user
       - key: DB_PASSWORD
-        value: render_password
+        value: Db7lLSM6PNEcPlPWKP7lQEVkQKMVi1T6
+      - key: VITE_APP_NAME
+        value: LockerPadel
+      - key: ASSET_URL
+        value: https://locker-padel-admin.onrender.com
   - type: postgres
     name: locker-padel-db
     plan: free

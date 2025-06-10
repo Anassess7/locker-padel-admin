@@ -19,8 +19,10 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Build frontend
-RUN npm install && npm run build
+# Install Node.js dependencies and build assets
+RUN npm install && \
+    npm run build && \
+    npm cache clean --force
 
 # Laravel permissions
 RUN chown -R www-data:www-data /var/www \
