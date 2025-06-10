@@ -18,7 +18,6 @@ return new class extends Migration
             ]);
             
             // Add new columns
-            $table->foreignId('client_id')->after('id')->constrained('clients');
             $table->decimal('prix_livraison', 10, 2)->default(0)->after('company');
             $table->decimal('prix_total', 10, 2)->default(0)->after('prix_livraison');
         });
@@ -28,9 +27,7 @@ return new class extends Migration
     {
         Schema::table('livraisons', function (Blueprint $table) {
             // Remove new columns
-            $table->dropForeign(['client_id']);
             $table->dropColumn([
-                'client_id',
                 'prix_livraison',
                 'prix_total'
             ]);

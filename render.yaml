@@ -1,47 +1,33 @@
 services:
   - type: web
     name: locker-padel-admin
-    runtime: docker
-    dockerfilePath: ./Dockerfile
+    env: docker
+    dockerfilePath: Dockerfile
+    buildCommand: ''
+    startCommand: ''
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        sync: false
-      - key: APP_URL
-        sync: false
+        value: # Add your app key or generate one via php artisan key:generate
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
-        sync: false
+        value: locker-padel-db.internal
       - key: DB_PORT
-        value: 3306
+        value: 5432
       - key: DB_DATABASE
-        sync: false
+        value: locker_padel
       - key: DB_USERNAME
-        sync: false
+        value: render_user
       - key: DB_PASSWORD
-        sync: false
-      - key: MAIL_MAILER
-        value: smtp
-      - key: MAIL_HOST
-        sync: false
-      - key: MAIL_PORT
-        sync: false
-      - key: MAIL_USERNAME
-        sync: false
-      - key: MAIL_PASSWORD
-        sync: false
-      - key: MAIL_ENCRYPTION
-        value: tls
-      - key: MAIL_FROM_ADDRESS
-        sync: false
-      - key: MAIL_FROM_NAME
-        value: "Locker Padel Admin"
-
-  - type: mysql
+        value: render_password
+  - type: postgres
     name: locker-padel-db
     plan: free
-    ipAllowList: [] 
+    region: oregon
+    username: render_user
+    password: render_password
+    databaseName: locker_padel
