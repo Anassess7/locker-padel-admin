@@ -23,6 +23,9 @@ COPY . .
 # Build Vite assets
 RUN npm run build
 
+# Déplacer le manifeste Vite à la racine de public/build
+RUN mv public/build/.vite/manifest.json public/build/manifest.json
+
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 

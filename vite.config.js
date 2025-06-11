@@ -11,8 +11,10 @@ export default defineConfig({
     build: {
         outDir: 'public/build',
         manifest: true,
+        manifestFileName: 'manifest.json', // <=== CECI est obligatoire
         rollupOptions: {
             input: ['resources/css/app.css', 'resources/js/app.js'],
         },
+        emptyOutDir: true,
     },
 });
